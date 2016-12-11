@@ -7,8 +7,12 @@ socket.on("connect",function(){
 console.log("User connected too");
 });
 
+
 //Console name and room
 console.log(name+" wants to join room :"+room);
+
+//Placing room in h1 by following line code
+jQuery('.room-place').text(room);
 
 //Listening to message send from server
 socket.on("message",function(message)
