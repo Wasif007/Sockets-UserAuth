@@ -7,25 +7,42 @@
 
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./css/stylesheets.css">
-
 </head>
 <body>
-<h1>Join Chat</h1>
-<!-- Going back to index page-->
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3 well">
+			<!-- Going back to index page-->
 <a href="/index.html">Change Settings</a>
 
 <h1 class="room-place"><!-- Place for room here--></h1>
 
 <!-- Place for storing messages-->
-<div class="message-recieved">
+<ul class="message-recieved list-group">
 	
-</div>
+</ul>
 
 <!-- Adding front end form-->
 <form id="message-form">
-	<input type="message" name="name">
-	<input type="submit" >
+<!-- Adding comment icon with message-->
+
+<div class="form-group">
+	<div class="input-group">
+		<span class="input-group-addon">
+			<i class="glyphicon glyphicon-comment"></i>
+		</span>
+		<input type="message" name="name" class="form-control">
+	</div>
+</div>
+	<div class="form-group">
+			<input type="submit" class="btn btn-primary btn-block">
+	</div>
 </form>
+		</div>
+	</div>
+</div>
+
+
 
 
 <!-- Adding jquery and sockets and moment so it can be alsoo used in front end-->

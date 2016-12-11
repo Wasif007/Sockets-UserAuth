@@ -21,6 +21,7 @@ console.log(name+" wants to join room :"+room);
 //Placing room in h1 by following line code
 jQuery('.room-place').text(room);
 
+
 //Listening to message send from server
 socket.on("message",function(message)
 	{
@@ -32,9 +33,13 @@ console.log("Message recieved  ");
 console.log(message.text);
 var $message=jQuery('.message-recieved');
 
+//For making messages better to look
+var $messages=jQuery('<li class="list-group-item"></li>')
+
 //Consoling the message out to user on its page rather than developers tool
-$message.append("<p><strong>"+message.name+":"+timestamp.local().format("h:mm a")+"</strong></p>");
-$message.append("<p>"+message.text+"</p>")
+$messages.append("<p><strong>"+message.name+":"+timestamp.local().format("h:mm a")+"</strong></p>");
+$messages.append("<p>"+message.text+"</p>");
+$message.append($messages);
 	});
 
 //Handling messages from submit button sended
