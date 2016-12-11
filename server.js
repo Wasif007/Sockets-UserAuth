@@ -25,6 +25,30 @@ var clientInfo={};
 io.on("connection",function(socket){
 	console.log("Client connecting to server");
 
+//Handling left chat room functionalety
+//disconnect is built in event called when left 
+socket.on("disconnect",function(){
+if(typeof clientInfo[socket.id] !== 'undefined')
+{
+
+//Leave chat room with following line of code
+	socket.leave(clientInfo[socket.id].room);
+
+
+//Emiting message to specific room only because of to(req.room)
+socket.broadcast.to(clientInfo[socket.id].room).emit("message",{
+text:clientInfo[socket.id].name+" has left",
+timestamp:moment.valueOf(),
+name:"System"
+});
+
+}
+//Deleting it from client id the id of socket
+delete clientInfo[socket.id];
+
+});
+
+
 
 //Handling certain room joining request
 socket.on("joinRoom",function(req){
