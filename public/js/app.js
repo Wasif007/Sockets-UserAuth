@@ -1,5 +1,5 @@
 var socket=io();
-var name=getQueryVariable('name');
+var name=getQueryVariable('name') || "Anonymous";
 var room=getQueryVariable('room');
 
 //Message for client for succesful connection
@@ -19,8 +19,11 @@ var timestamp=moment.utc(message.timestamp);
 console.log("Message recieved  ");
 //Consoling message as recieved
 console.log(message.text);
+var $message=jQuery('.message-recieved');
+
 //Consoling the message out to user on its page rather than developers tool
-jQuery('.message-recieved').append("<p><strong>"+timestamp.local().format("h:mm a")+"</strong>"+message.text+"</p>")
+$message.append("<p><strong>"+message.name+":"+timestamp.local().format("h:mm a")+"</strong></p>");
+$message.append("<p>"+message.text+"</p>")
 	});
 
 //Handling messages from submit button sended
@@ -39,7 +42,8 @@ var message_send=$form.find("input[name]");
 	
 	//Sending message to other client
 	socket.emit("message",{
-	
+		//Sending name
+		name:name,
 		//Sending message
 		text:message_send.val()
 	

@@ -40,6 +40,7 @@ io.emit('message',message);
 
 //Send message to client
 	socket.emit("message",{
+		name:"System",
 		text:"Connected to chat app",
 		timestamp:moment.valueOf()
 	})
