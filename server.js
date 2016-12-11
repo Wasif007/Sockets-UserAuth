@@ -10,6 +10,8 @@ var app=express();
 var http=require('http').Server(app);
 //Requiring socket to use it
 var io=require('socket.io')(http);
+//Requiring timestamp moment to use it
+var moment=require('moment');
 
 //for front end specifing folder
 app.use(express.static(__dirname+"/public"));
@@ -29,13 +31,17 @@ console.log("message recieved from client:"+message.text);
 //Send it to everyone except one that had actually send it
 //socket.broadcast.emit('message',message);
 
+//Adding timestamp for each message as send by client
+message.timestamp=moment.valueOf();
+
 //Send it to everyone and one that had actually send it too
 io.emit('message',message);
 	});
 
 //Send message to client
 	socket.emit("message",{
-		text:"Connected to chat app"
+		text:"Connected to chat app",
+		timestamp:moment.valueOf()
 	})
 })
 //Local host starting

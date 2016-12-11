@@ -8,11 +8,14 @@ console.log("User connected too");
 //Listening to message send from server
 socket.on("message",function(message)
 	{
+		//Handling timestamp as recieved
+var timestamp=moment.utc(message.timestamp);
+
 console.log("Message recieved  ");
 //Consoling message as recieved
 console.log(message.text);
 //Consoling the message out to user on its page rather than developers tool
-jQuery('.message-recieved').append("<p>"+message.text+"</p>")
+jQuery('.message-recieved').append("<p><strong>"+timestamp.local().format("h:mm a")+"</strong>"+message.text+"</p>")
 	});
 
 //Handling messages from submit button sended
