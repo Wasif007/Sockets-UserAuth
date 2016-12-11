@@ -17,7 +17,7 @@
 	<div class="row">
 		<!--12 divided to 3 parts with data in middle-->
 
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-4 col-md-offset-4 well" >
 		<h1>Join Chat</h1>
 			<!-- adding form to add name to add name to url to be used in next page chat.html-->
 <form action="/chat.html">
@@ -27,25 +27,34 @@
 		
 	<!-- For name-->
 	<label>Display Name</label>
-
+<div class="input-group">
+	<span class="input-group-addon">
+		<i class="glyphicon glyphicon-user"> </i>
+	</span>
 	<!-- Using class form control in form group class-->
-	
 	<input type="text" name="name" class="form-control">
-
+</div>
+	
 	</div>
 	<!-- Using css form group class-->
 	<div class="form-group">
 		
 	<!-- For name-->
 <label>Room</label>
+	<div class="input-group">
+	<span class="input-group-addon">
+		<i class="glyphicon glyphicon-comment"> </i>
+	</span>
 	<!-- Using class form control in form group class-->
-	
 <input type="text" name="room" class="form-control">
+
+</div>
+
 	</div>
     <!-- For Room-->
 	
 	<div class="form-group">
-	<input type="submit" class="btn btn-primary" value="Join Chat">	
+	<input type="submit" class="btn btn-primary btn-block" value="Join Chat">	
 	</div>
 
 	
