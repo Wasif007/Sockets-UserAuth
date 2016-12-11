@@ -16,8 +16,18 @@ app.use(express.static(__dirname+"/public"));
 
 //When user load page localhost:3000 it sends connection message and below function gets call
 //Only if socket is installed for front end too
-io.on("connection",function(){
+//socket is basically each client getting connected to server
+io.on("connection",function(socket){
 	console.log("Client connecting to server");
+
+	socket.on("message",function(message){
+console.log("message recieved from client:"+message.text);
+socket.broadcast.emit('message',message);
+	});
+
+	socket.emit("message",{
+		text:"Connected to chat app"
+	})
 })
 //Local host starting
 http.listen(PORT,function(){
