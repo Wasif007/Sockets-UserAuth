@@ -1,9 +1,14 @@
 var socket=io();
+var name=getQueryVariable('name');
+var room=getQueryVariable('room');
 
 //Message for client for succesful connection
 socket.on("connect",function(){
 console.log("User connected too");
 });
+
+//Console name and room
+console.log(name+" wants to join room :"+room);
 
 //Listening to message send from server
 socket.on("message",function(message)
