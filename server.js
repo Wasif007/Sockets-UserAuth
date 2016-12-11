@@ -19,6 +19,33 @@ app.use(express.static(__dirname+"/public"));
 //Getting list of sockets id in it with each having name and room key value pairs
 var clientInfo={};
 
+//Users
+function sendingnumUsers(socket)
+{
+	//Getting id of user
+	var info=clientInfo[socket.id];
+	//Storing it in array
+	var users=[];
+
+	if(typeof info==='undefined')
+	{
+		return;
+	}
+
+//Using build in function to get attributes of clientId
+	Object.keys(clientInfo).forEach(function(socketId){
+		var userInfo=clientInfo[socketId];
+		if(userInfo.room===info.room){
+			users.push(userInfo.name);
+		}
+	});
+	socket.emit("message",{
+		text:"users are "+users.join(', '),
+		timestamp:moment.valueOf(),
+		name:"System"
+	});
+}
+
 //When user load page localhost:3000 it sends connection message and below function gets call
 //Only if socket is installed for front end too
 //socket is basically each client getting connected to server
@@ -71,6 +98,13 @@ name:"System"
 //Recieved message from clients
 	socket.on("message",function(message){
 
+//@currentusers for checking users in the current room
+if(message.text==='@currentusers')
+{
+//calling function
+sendingnumUsers(socket);
+}else
+{
 //Output it on cmd
 console.log("message recieved from client:"+message.text);
 
@@ -83,8 +117,10 @@ message.timestamp=moment.valueOf();
 //Send it to everyone and one that had actually send it too
 //Adding specfic room functionalety by getting socket id
 io.to(clientInfo[socket.id].room).emit('message',message);
-	});
 
+
+}
+});
 //Send message to client
 	socket.emit("message",{
 		name:"System",
