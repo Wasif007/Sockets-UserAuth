@@ -5,6 +5,13 @@ var room=getQueryVariable('room');
 //Message for client for succesful connection
 socket.on("connect",function(){
 console.log("User connected too");
+
+//Requesting to join certain room
+socket.emit("joinRoom",{
+	name:name,
+	room:room
+});
+
 });
 
 

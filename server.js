@@ -16,11 +16,33 @@ var moment=require('moment');
 //for front end specifing folder
 app.use(express.static(__dirname+"/public"));
 
+//Getting list of sockets id in it with each having name and room key value pairs
+var clientInfo={};
+
 //When user load page localhost:3000 it sends connection message and below function gets call
 //Only if socket is installed for front end too
 //socket is basically each client getting connected to server
 io.on("connection",function(socket){
 	console.log("Client connecting to server");
+
+
+//Handling certain room joining request
+socket.on("joinRoom",function(req){
+
+//'asdasd':{name:req.name,room:req.room}
+clientInfo[socket.id]=req
+
+//Making group as a room
+socket.join(req.room);
+
+//Emiting message to specific room only because of to(req.room)
+socket.broadcast.to(req.room).emit("message",{
+text:req.name+" has joined",
+timestamp:moment.valueOf(),
+name:"System"
+});
+
+});
 
 //Recieved message from clients
 	socket.on("message",function(message){
@@ -35,7 +57,8 @@ console.log("message recieved from client:"+message.text);
 message.timestamp=moment.valueOf();
 
 //Send it to everyone and one that had actually send it too
-io.emit('message',message);
+//Adding specfic room functionalety by getting socket id
+io.to(clientInfo[socket.id].room).emit('message',message);
 	});
 
 //Send message to client
