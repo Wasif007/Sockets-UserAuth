@@ -20,11 +20,20 @@ app.use(express.static(__dirname+"/public"));
 io.on("connection",function(socket){
 	console.log("Client connecting to server");
 
+//Recieved message from clients
 	socket.on("message",function(message){
+
+//Output it on cmd
 console.log("message recieved from client:"+message.text);
-socket.broadcast.emit('message',message);
+
+//Send it to everyone except one that had actually send it
+//socket.broadcast.emit('message',message);
+
+//Send it to everyone and one that had actually send it too
+io.emit('message',message);
 	});
 
+//Send message to client
 	socket.emit("message",{
 		text:"Connected to chat app"
 	})

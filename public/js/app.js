@@ -11,6 +11,8 @@ socket.on("message",function(message)
 console.log("Message recieved  ");
 //Consoling message as recieved
 console.log(message.text);
+//Consoling the message out to user on its page rather than developers tool
+jQuery('.message-recieved').append("<p>"+message.text+"</p>")
 	});
 
 //Handling messages from submit button sended
