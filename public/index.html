@@ -3,23 +3,58 @@
 <meta charset="utf-8">
 
 	<title>Chat Application</title>
-	
+	<!-- Css link added for styling-->
+
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/stylesheets.css">
 
 </head>
 <body>
-<!-- adding form to add name to add name to url to be used in next page chat.html-->
+
+
+	<!-- container class for setting all rows-->
+<div class="container">
+	<div class="row">
+		<!--12 divided to 3 parts with data in middle-->
+
+		<div class="col-md-4 col-md-offset-4">
+		<h1>Join Chat</h1>
+			<!-- adding form to add name to add name to url to be used in next page chat.html-->
 <form action="/chat.html">
 
+	<!-- Using css form group class-->
+	<div class="form-group">
+		
 	<!-- For name-->
 	<label>Display Name</label>
-	<input type="text" name="name">
 
+	<!-- Using class form control in form group class-->
+	
+	<input type="text" name="name" class="form-control">
+
+	</div>
+	<!-- Using css form group class-->
+	<div class="form-group">
+		
+	<!-- For name-->
+<label>Room</label>
+	<!-- Using class form control in form group class-->
+	
+<input type="text" name="room" class="form-control">
+	</div>
     <!-- For Room-->
-	<label>Room</label>
-	<input type="text" name="room">
+	
+	<div class="form-group">
+	<input type="submit" class="btn btn-primary" value="Join Chat">	
+	</div>
 
-	<input type="submit" >
+	
 
 </form>
+		</div>
+	</div>
+</div>
+
+
 </body>
 </html>
